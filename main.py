@@ -288,17 +288,24 @@ async def main():
     font = pygame.font.Font(None, 22)
     big_font = pygame.font.Font(None, 40)
 
-    #async def play_music():
-        ##pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
-        #pygame.mixer.music.play(-1)
-
-    #asyncio.get_event_loop().run_until_complete(play_music())
-
+    # ← INICIALIZAÇÃO ANTES DO LOOP
     music_loaded = False
+    world = GridWorld(GRID_SIZE)
+    odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
+    while True:
+        hx, hy = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        tx, ty = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        if abs(hx - tx) + abs(hy - ty) > 10: break
+    hunter = HunterParticle(hx, hy, world, odor, num_particles=NUM_PARTICLES)
+    target = Target(tx, ty, world)
+    steps = 0
+    game_started = False
+    game_over = False
+    graphs_surface = pygame.Surface((WIDTH, 120))
+    tracking_errors = deque(maxlen=200)
 
-    music_loaded = False  # ← aqui está certo
-
-    while True:  # ← loop principal
+    # ← LOOP PRINCIPAL DEPOIS
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
@@ -310,25 +317,7 @@ async def main():
 
         # ... resto do loop do jogo ...
 
-        await asyncio.sleep(0)  # ← obrigatório no async pygbag
-
-    world = GridWorld(GRID_SIZE)
-    odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
-
-    while True:
-        hx, hy = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
-        tx, ty = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
-        if abs(hx - tx) + abs(hy - ty) > 10: break
-
-    hunter = HunterParticle(hx, hy, world, odor, num_particles=NUM_PARTICLES)
-    target = Target(tx, ty, world)
-
-    steps = 0
-    game_started = False
-    game_over = False
-
-    graphs_surface = pygame.Surface((WIDTH, 120))
-    tracking_errors = deque(maxlen=200)
+        await asyncio.sleep(0)
 
     # Tela Inicial
     while not game_started:
