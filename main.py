@@ -284,6 +284,15 @@ async def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     pygame.display.set_caption("Cobra Cega Adaptativa")
+
+    # testa direto sem condição
+    try:
+        pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+        pygame.mixer.music.play(-1)
+        print("Música OK!")
+    except Exception as e:
+        print(f"Erro na música: {e}")
+
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 22)
     big_font = pygame.font.Font(None, 40)
@@ -293,11 +302,42 @@ async def main():
         #pygame.mixer.music.play(-1)
 
     #asyncio.get_event_loop().run_until_complete(play_music())
-
+    # pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+    # pygame.mixer.music.play(-1)
     # --- Inicialização de Música (desativada temporariamente) ---
-    pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
-    pygame.mixer.music.play(-1)
+    music_loaded = False
+    world = GridWorld(GRID_SIZE)
+    odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
+    while True:
+        hx, hy = random.randint(0,GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        tx, ty = random.randint(0, GRID_SIZE - 1), random.randint(0, GRID_SIZE - 1)
+        if abs(hx - tx) + abs(hy - ty) > 10: break
+        hunter = HunterParticle(hx, hy, world, odor, num_particles=NUM_PARTICLES)
+        target = Target(tx, ty, world)
+        steps = 0
+        game_started = False
+        game_over = False
+        graphs_surface = pygame.Surface((WIDTH, 120))
+        tracking_errors = deque(maxlen=200)
 
+        # ← LOOP PRINCIPAL DEPOIS
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return
+                if event.type == pygame.KEYDOWN:
+                    if not music_loaded:
+                        pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+                        pygame.mixer.music.play(-1)
+                        music_loaded = True
+                    if event.key == pygame.K_SPACE:
+                        game_started = True
+                        steps = 0
+
+            # ... resto do loop do jogo ...
+
+            await asyncio.sleep(0)
     world = GridWorld(GRID_SIZE)
     odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
 
@@ -380,7 +420,7 @@ async def main():
                 if (hunter.x, hunter.y) == (target.x, target.y):
                     game_over = True
 
-        # RenderizaÃ§Ã£o grÃ¡fica
+        # Renderizacao grafica
         screen.fill(BLACK)
         for i in range(GRID_SIZE):
             for j in range(GRID_SIZE):
