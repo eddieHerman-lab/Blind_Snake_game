@@ -21,11 +21,11 @@ Velocity (vx, vy)
 The prediction model injects continuous stochastic noise to capture feints and abrupt acceleration changes from a human player.
 # 2. Dynamic Odor Field , Natural Optimization
 Inspired by Ant Colony Optimization (ACO), the target deposits a chemical trail at every step. This field undergoes exponential temporal decay, acting as a short-term environmental memory. The hunter reads only the highest-intensity local gradient each frame.
-# 3. Relaxed Hamming Distance — Trajectory Alignment (core innovation)
-The likelihood function adapts the Relaxed Hamming Distance — traditionally used in NLP and bioinformatics — to analyze movement kinematics.
+# 3. Relaxed Hamming Distance — Trajectory Alignment 
+The likelihood function adapts the Relaxed Hamming Distance  traditionally used in NLP and bioinformatics — to analyze movement kinematics.
 The metric compares each particle's step history against the real odor trail. Because it is relaxed (supporting look-ahead and temporal shifts), it tolerates small delays, gaps, and geometric deviations — allowing the particle cloud to collapse precisely onto the target's dynamic signature and escape style.
 Repository Structure
-FileDescriptionmain_jogavel_async.pyWeb/Human version — balanced for real-time gameplay; compatible with WebAssembly via pygbagcobra_cega_qlearning_8dirs.pyTarget controlled by Tabular Q-Learning with 8-directional action space (including soft diagonals); explores emergence of defensive policies under spatial confinementcobra_cega_sem_qlearning.pyBaseline version with simple heuristics / Brownian motion for validating and calibrating the particle filter convergence rates
+FileDescriptionmain_jogavel_async.pyWeb/Human version  balanced for real-time gameplay; compatible with WebAssembly via pygbagcobra_cega_qlearning_8dirs.pyTarget controlled by Tabular Q-Learning with 8-directional action space (including soft diagonals); explores emergence of defensive policies under spatial confinementcobra_cega_sem_qlearning.pyBaseline version with simple heuristics / Brownian motion for validating and calibrating the particle filter convergence rates
 
 # Real-Time Analytics Panel
 The environment renders a live analytics dashboard at the bottom of the screen:
