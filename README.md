@@ -1,25 +1,24 @@
-# Blind_Snake_game
+Cobra Cega — Stochastic State Estimation & Reinforcement Learning in Hidden Environments
 
+Can an AI catch something it cannot see?
 
+ Play in your browser →
 
-## Cobra Cega: Estimação de Estado Estocástica e Aprendizado por Reforço em Ambientes Ocultos. Este repositório contém um ecossistema experimental desenvolvido em Python (Pygame) para explorar o problema de Observabilidade Parcial (POMDP), controle motor e sistemas dinâmicos adversários. O projeto simula um jogo clássico de "Cobra Cega", onde um caçador autônomo (IA) precisa capturar um alvo (jogador humano ou agente de RL) completamente invisível.
-# Fundamentação Teórica e Arquitetura Em vez de depender de arquiteturas de redes profundas (black-box) para a localização do alvo, este projeto utiliza um framework híbrido baseado em princípios físicos, estatísticos e outras metricas: 
-## 1. Filtro de Partículas (Inferência Bayesianas via Monte Carlo)O caçador mantém um Estado de Crença (Belief State) global representado por uma nuvem de 300 a 500 partículas. Cada partícula estima simultaneamente o espaço de fases do alvo: Posição $(x, y)$ e Velocidade $(v_x, v_y)$. O modelo de predição injeta ruído estocástico contínuo para capturar fintas e mudanças abruptas de aceleração do jogador humano.2. Campo de Odor Dinâmico (Otimização Natural)Inspirado em algoritmos de colônias de formigas (Ant Colony Optimization), o alvo deposita um rastro químico a cada passo. Esse campo sofre um decaimento temporal exponencial, funcionando como uma memória de curto prazo do ambiente. O caçador capta apenas o gradiente local de maior intensidade a cada frame.3. Distância de Hamming Relaxada (Alinhamento de Trajetórias) A grande inovação do projeto está na função de verossimilhança. Adaptamos a distância de Hamming relaxada  tradicionalmente usada em processamento de linguagem natural e bioinformática — para analisar a cinemática de movimento.A métrica compara o histórico de passos de cada partícula com o rastro real de odor. Por ser relaxada (com suporte a look-ahead e shifts), ela tolera pequenos atrasos temporais, gaps e desvios geométricos, permitindo que a nuvem de partículas colapse exatamente sobre a assinatura dinâmica e o "estilo" de fuga do alvo.
-🗂️ Versões Disponíveis no RepositórioO projeto está dividido em três implementações distintas para fins de análise comparativa:main_jogavel_async.py (Versão Web/Humana): Balanceada para jogabilidade em tempo real. O caçador adota um comportamento dinâmico de "bote" baseado no colapso de entropia da nuvem. Totalmente compatível com WebAssembly via pygbag.cobra_cega_qlearning_8dirs.py: O Alvo é controlado por um agente de Q-Learning Tabular expandido para um espaço de ações de 8 direções (incluindo diagonais suaves). Explora a emergência de políticas defensivas (como oscilação em bordas) sob confinamento espacial.cobra_cega_sem_qlearning.py: Versão base do alvo utilizando heurísticas simples/movimento Browniano para validação e calibração das taxas de convergência do Filtro de Partículas do caçador.🛠️ Como Executar o PProjeto Pré-requisitos Python3.9 ou superiorNumPyPygameInstalaçãoBash# Clone o repositório
-git clone https://github.com/seu-usuario/cobra-cega-pomdp.git
+ Overview
+This project is an experimental ecosystem built in Python (Pygame) to explore Partial Observability (POMDP), motor control, and adversarial dynamic systems.
+It simulates a Blind Snake game: an autonomous AI hunter must capture a target (human player or RL agent) that is completely invisible. No cheat codes — pure probabilistic inference.
 
-# Acesse a pasta do projeto
-cd cobra-cega-pomdp
+ Theoretical Framework
+Instead of relying on black-box deep learning for target localization, this project uses a hybrid framework grounded in physics, statistics, and signal analysis:
+1. Particle Filter — Bayesian Inference via Monte Carlo
+The hunter maintains a global Belief State represented by a cloud of 300–500 particles. Each particle simultaneously estimates the target's phase space:
 
-# Instale as dependências
-pip install pygame numpy
-Rodando LocalmentePara jogar a versão interativa contra a IA:Bashpython main_jogavel_async.py
- Deploy na Web (Compilação para WebAssembly)Esta arquitetura foi preparada para rodar direto no navegador utilizando o compilador pygbag.Bash# Instale o pygbag
-pip install pygbag
+Position (x, y)
+Velocity (vx, vy)
 
-# Execute o servidor de testes local (acesse http://localhost:8000)
-pygbag .
-
-# Gere o build final para o GitHub Pages
-pygbag --build .
-O build gerado na pasta build/web pode ser hospedado gratuitamente no GitHub Pages ou Itch.io.📊 Métricas Monitoradas em Tempo RealO ambiente renderiza um painel analítico inferior contendo:Gráfico de Similaridade: O score médio de correspondência do histórico de Hamming.Gráfico de Entropia: Mede a incerteza da nuvem de partículas (colapsa no momento do "bote").Erro de Tracking: A distância Euclidiana real entre o centro de massa da crença da IA e a posição real do Alvo.
+The prediction model injects continuous stochastic noise to capture feints and abrupt acceleration changes from a human player.
+2. Dynamic Odor Field — Natural Optimization
+Inspired by Ant Colony Optimization (ACO), the target deposits a chemical trail at every step. This field undergoes exponential temporal decay, acting as a short-term environmental memory. The hunter reads only the highest-intensity local gradient each frame.
+3. Relaxed Hamming Distance — Trajectory Alignment (core innovation)
+The likelihood function adapts the Relaxed Hamming Distance — traditionally used in NLP and bioinformatics — to analyze movement kinematics.
+The metric compares each particle's step history against the real odor trail. Because it is relaxed (supporting look-ahead and temporal shifts), it tolerates small delays, gaps, and geometric deviations — allowing the particle cloud to collapse precisely onto the target's dynamic signature and escape style.
