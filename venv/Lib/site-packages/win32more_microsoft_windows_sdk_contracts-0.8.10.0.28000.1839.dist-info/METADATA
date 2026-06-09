@@ -1,0 +1,4 @@
+Metadata-Version: 2.4
+Name: win32more-Microsoft.Windows.SDK.Contracts
+Version: 0.8.10.0.28000.1839
+Requires-Dist: win32more-core==0.8.*

@@ -1,0 +1,4 @@
+Metadata-Version: 2.4
+Name: win32more-appsdk
+Version: 0.8.3
+Requires-Dist: win32more-core==0.8.*

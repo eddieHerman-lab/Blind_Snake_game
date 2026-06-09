@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: win32more-Microsoft.Web.WebView2
+Version: 0.8.1.0.3967.48
+License-File: LICENSE (Microsoft.Web.WebView2).txt
+Requires-Dist: win32more-core==0.8.*
+Requires-Dist: win32more-microsoft-windows-sdk-contracts<0.9,>=0.8.10.0.26100.7705

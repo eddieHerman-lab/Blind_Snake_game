@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: win32more-Microsoft.Graphics.Win2D
+Version: 0.8.1.4.0
+Requires-Dist: win32more-core==0.8.*
+Requires-Dist: win32more-microsoft-windowsappsdk<0.9,>=0.8.1.8.260209005
