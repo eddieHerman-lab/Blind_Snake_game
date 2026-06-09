@@ -3,18 +3,25 @@ with open('main.py', 'r', encoding='utf-8', errors='replace') as f:
     content = f.read()
 
 # corrige os caracteres corrompidos mais comuns
-content = content.replace('Ã§', 'ç')
-content = content.replace('Ã£', 'ã')
-content = content.replace('Ã©', 'é')
-content = content.replace('Ã¡', 'á')
-content = content.replace('Ã³', 'ó')
-content = content.replace('Ã ', 'à')
-content = content.replace('Ãª', 'ê')
-content = content.replace('Ã­', 'í')
-content = content.replace('Ãµ', 'õ')
-content = content.replace('Ã´', 'ô')
-content = content.replace('Ã¢', 'â')
-content = content.replace('Ãº', 'ú')
+import re
+
+with open('main.py', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+fixes = {
+    'Ã§': 'ç', 'Ã£': 'ã', 'Ã©': 'é', 'Ã¡': 'á',
+    'Ã³': 'ó', 'Ã ': 'à', 'Ãª': 'ê', 'Ã­': 'í',
+    'Ãµ': 'õ', 'Ã´': 'ô', 'Ã¢': 'â', 'Ãº': 'ú',
+    'Ã‡': 'Ç', 'Ã"': 'Ó', 'Ã‰': 'É', 'Ã€': 'À'
+}
+
+for errado, certo in fixes.items():
+    content = content.replace(errado, certo)
+
+with open('main.py', 'w', encoding='utf-8') as f:
+    f.write(content)
+
+print("Corrigido!")
 
 with open('main.py', 'w', encoding='utf-8') as f:
     f.write(content)
