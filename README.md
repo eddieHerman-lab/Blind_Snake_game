@@ -10,14 +10,14 @@ It simulates a Blind Snake game: an autonomous AI hunter must capture a target (
 
  # Theoretical Framework
 Instead of relying on black-box deep learning for target localization, this project uses a hybrid framework grounded in physics, statistics, and signal analysis:
-1. Particle Filter — Bayesian Inference via Monte Carlo
+1. Particle Filter  Bayesian Inference via Monte Carlo
 The hunter maintains a global Belief State represented by a cloud of 300–500 particles. Each particle simultaneously estimates the target's phase space:
 
 Position (x, y)
 Velocity (vx, vy)
 
 The prediction model injects continuous stochastic noise to capture feints and abrupt acceleration changes from a human player.
-# 2. Dynamic Odor Field — Natural Optimization
+# 2. Dynamic Odor Field , Natural Optimization
 Inspired by Ant Colony Optimization (ACO), the target deposits a chemical trail at every step. This field undergoes exponential temporal decay, acting as a short-term environmental memory. The hunter reads only the highest-intensity local gradient each frame.
 # 3. Relaxed Hamming Distance — Trajectory Alignment (core innovation)
 The likelihood function adapts the Relaxed Hamming Distance — traditionally used in NLP and bioinformatics — to analyze movement kinematics.
@@ -28,14 +28,14 @@ FileDescriptionmain_jogavel_async.pyWeb/Human version — balanced for real-time
 # Real-Time Analytics Panel
 The environment renders a live analytics dashboard at the bottom of the screen:
 
-Similarity Graph — average Hamming history match score
-Entropy Graph — measures belief cloud uncertainty (collapses at strike moment)
-Tracking Error — Euclidean distance between the AI's belief centroid and the target's real position
+Similarity Graph —> average Hamming history match score
+Entropy Graph —> measures belief cloud uncertainty (collapses at strike moment)
+Tracking Error —> Euclidean distance between the AI's belief centroid and the target's real position
 
 # Running Locally
 Prerequisites: Python 3.9+, NumPy, Pygame
 bash# Clone the repository
-git clone https://github.com/seu-usuario/cobra-cega-pomdp.git
+git clone https://github.com/eddieHerman-lab/cobra-cega-pomdp.git
 cd cobra-cega-pomdp
 
 # Install dependencies
