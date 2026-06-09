@@ -290,7 +290,7 @@ async def main():
 
     # --- InicializaÃ§Ã£o de MÃºsica (Opcional) ---
     # To uncomment when you have a music file:
-    pygame.mixer.music.load("C:/Users/55219/Downloads/retro-bgm-chan-enemy-encounter-534620.mp3")
+    pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
     pygame.mixer.music.play(-1) # -1 faz tocar em loop perpÃ©tuo
 
     world = GridWorld(GRID_SIZE)
@@ -315,10 +315,10 @@ async def main():
     while not game_started:
         screen.fill(BLACK)
         title = big_font.render("COBRA CEGA", True, WHITE)
-        instr1 = font.render("VocÃª Ã© o ponto VERMELHO. Fuja do caÃ§ador AZUL!", True, WHITE)
+        instr1 = font.render("Voce o ponto VERMELHO. Fuja do caçador AZUL!", True, WHITE)
         instr2 = font.render("Use as SETAS ou WASD para se mover.", True, WHITE)
-        instr3 = font.render("Regra de Ouro: NÃ£o fique parado muito tempo!", True, ORANGE)
-        instr4 = font.render("Pressione ESPAÃ‡O para comeÃ§ar.", True, YELLOW)
+        instr3 = font.render("Regra de Ouro: Não fique parado muito tempo!", True, ORANGE)
+        instr4 = font.render("Pressione ESPAÇO para começar.", True, YELLOW)
         screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 3 - 50))
         screen.blit(instr1, (WIDTH // 2 - instr1.get_width() // 2, HEIGHT // 2 - 20))
         screen.blit(instr2, (WIDTH // 2 - instr2.get_width() // 2, HEIGHT // 2 + 10))
