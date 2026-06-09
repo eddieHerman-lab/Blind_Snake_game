@@ -46,16 +46,7 @@ pip install pygame numpy
 Play against the AI
 python main_jogavel_async.py
 
-# Web Deploy (WebAssembly via pygbag)
-bash# Install pygbag
-pip install pygbag
 
-# Local test server (open http://localhost:8000)
-pygbag .
-
-# Generate final build for GitHub Pages
-pygbag --build .
-The build/web folder can be hosted for free on GitHub Pages or Itch.io.
 
  Research Directions
 
