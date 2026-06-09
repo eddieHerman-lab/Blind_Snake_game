@@ -14,7 +14,7 @@ from collections import deque
 import asyncio  # REQUISITO PARA WEB/PYGBAG
 
 # ============================================================
-# CONFIGURAÃ‡Ã•ES (Balanceadas para Jogabilidade)
+# CONFIGURAÇÕES (Balanceadas para Jogabilidade)
 # ============================================================
 GRID_SIZE = 30
 CELL_SIZE = 20
@@ -44,7 +44,7 @@ ORANGE = (255, 165, 0)
 
 
 # ============================================================
-# DISTÃ‚NCIA DE HAMMING RELAXADA
+# DISTÂNCIA DE HAMMING RELAXADA
 # ============================================================
 def relaxed_hamming(seq1, seq2, max_shift=2):
     s1 = [c for c in seq1 if c is not None]
