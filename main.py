@@ -283,7 +283,7 @@ def draw_graph(surface, history, color, y_offset, max_val=None, label=""):
 async def main():
     pygame.init()
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
-    pygame.display.set_caption("Cobra Cega â€“ Adaptativo")
+    pygame.display.set_caption("Cobra Cega Adaptativa")
     clock = pygame.time.Clock()
     font = pygame.font.Font(None, 22)
     big_font = pygame.font.Font(None, 40)
@@ -363,7 +363,7 @@ async def main():
             target.move(hunter.x, hunter.y, new_x, new_y)
             target.path.append((target.x, target.y))
 
-            # --- CORREÃ‡ÃƒO DE TUNELAMENTO (Checa se o jogador bateu no caÃ§ador) ---
+            # --- CORREÇÂO DE TUNELAMENTO (Checa se o jogador bateu no caçador) ---
             if (hunter.x, hunter.y) == (target.x, target.y):
                 game_over = True
 
@@ -376,7 +376,7 @@ async def main():
                 hunter.update_weights()
                 hunter.move_towards_estimate()
 
-                # --- SEGUNDA CHECAGEM (Checa se o caÃ§ador capturou o jogador) ---
+                # --- SEGUNDA CHECAGEM (Checa se o caçador capturou o jogador) ---
                 if (hunter.x, hunter.y) == (target.x, target.y):
                     game_over = True
 
@@ -442,5 +442,5 @@ async def main():
     pygame.quit()
 
 
-# Roda o ambiente assÃ­ncrono
+# Roda o ambiente assincrono
 asyncio.run(main())
