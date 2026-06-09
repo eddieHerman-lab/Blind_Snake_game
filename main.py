@@ -294,9 +294,23 @@ async def main():
 
     #asyncio.get_event_loop().run_until_complete(play_music())
 
-    # --- Inicialização de Música (desativada temporariamente) ---
-    pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
-    pygame.mixer.music.play(-1)
+    music_loaded = False
+
+    music_loaded = False  # ← aqui está certo
+
+    while True:  # ← loop principal
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+            if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+                if not music_loaded:
+                    pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+                    pygame.mixer.music.play(-1)
+                    music_loaded = True
+
+        # ... resto do loop do jogo ...
+
+        await asyncio.sleep(0)  # ← obrigatório no async pygbag
 
     world = GridWorld(GRID_SIZE)
     odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
