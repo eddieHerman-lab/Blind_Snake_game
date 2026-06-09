@@ -287,7 +287,7 @@ async def main():
 
     # testa direto sem condição
     try:
-        pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+        pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.ogg")
         pygame.mixer.music.play(-1)
         print("Música OK!")
     except Exception as e:
