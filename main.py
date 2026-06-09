@@ -20,7 +20,7 @@ GRID_SIZE = 30
 CELL_SIZE = 20
 WIDTH = GRID_SIZE * CELL_SIZE
 HEIGHT = GRID_SIZE * CELL_SIZE + 120
-FPS = 15
+FPS = 20
 
 DECAY_RATE = 0.9  # Modificado de 0.90 para o rastro sumir um pouco mais rÃ¡pido
 DEPOSIT_AMOUNT = 1.0
@@ -96,7 +96,7 @@ class GridWorld:
 
 
 class OdorField:
-    def __init__(self, size, decay=0.85):
+    def __init__(self, size, decay=0.9):
         self.size = size
         self.decay = decay
         self.field = np.zeros((size, size), dtype=float)
@@ -278,7 +278,7 @@ def draw_graph(surface, history, color, y_offset, max_val=None, label=""):
 
 
 # ============================================================
-# EXECUÃ‡ÃƒO PRINCIPAL ASSÃ�NCRONA (CompatÃ­vel com Pygbag/Web)
+# EXECUÇÂO PRINCIPAL ASSINCRONA (Compativel com Pygbag/Web)
 # ============================================================
 async def main():
     pygame.init()
@@ -288,10 +288,15 @@ async def main():
     font = pygame.font.Font(None, 22)
     big_font = pygame.font.Font(None, 40)
 
-    # --- InicializaÃ§Ã£o de MÃºsica (Opcional) ---
-    # To uncomment when you have a music file:
-    pygame.mixer.music.load("C:/Users/55219/Downloads/retro-bgm-chan-enemy-encounter-534620.mp3")
-    pygame.mixer.music.play(-1) # -1 faz tocar em loop perpÃ©tuo
+    #async def play_music():
+        ##pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+        #pygame.mixer.music.play(-1)
+
+    #asyncio.get_event_loop().run_until_complete(play_music())
+
+    # --- Inicialização de Música (desativada temporariamente) ---
+    pygame.mixer.music.load("assets/retro-bgm-chan-enemy-encounter-534620.mp3")
+    pygame.mixer.music.play(-1)
 
     world = GridWorld(GRID_SIZE)
     odor = OdorField(GRID_SIZE, decay=DECAY_RATE)
@@ -315,10 +320,10 @@ async def main():
     while not game_started:
         screen.fill(BLACK)
         title = big_font.render("COBRA CEGA", True, WHITE)
-        instr1 = font.render("VocÃª Ã© o ponto VERMELHO. Fuja do caÃ§ador AZUL!", True, WHITE)
+        instr1 = font.render("Voce e o ponto VERMELHO. Fuja do caçador AZUL!", True, WHITE)
         instr2 = font.render("Use as SETAS ou WASD para se mover.", True, WHITE)
-        instr3 = font.render("Regra de Ouro: NÃ£o fique parado muito tempo!", True, ORANGE)
-        instr4 = font.render("Pressione ESPAÃ‡O para comeÃ§ar.", True, YELLOW)
+        instr3 = font.render("Regra de Ouro: Não fique parado muito tempo!", True, ORANGE)
+        instr4 = font.render("Pressione ESPAÇO para começar.", True, YELLOW)
         screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 3 - 50))
         screen.blit(instr1, (WIDTH // 2 - instr1.get_width() // 2, HEIGHT // 2 - 20))
         screen.blit(instr2, (WIDTH // 2 - instr2.get_width() // 2, HEIGHT // 2 + 10))
