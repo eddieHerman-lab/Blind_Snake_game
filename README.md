@@ -41,7 +41,7 @@ cd cobra-cega-pomdp
 # Install dependencies
 pip install pygame numpy
 
-# Play against the AI
+Play against the AI
 python main_jogavel_async.py
 
 # Web Deploy (WebAssembly via pygbag)
@@ -55,14 +55,14 @@ pygbag .
 pygbag --build .
 The build/web folder can be hosted for free on GitHub Pages or Itch.io.
 
-🔬 Research Directions
+ Research Directions
 
 How does Relaxed Hamming distance compare to traditional Gaussian likelihood in particle filters?
 Can the Q-Learning agent develop evasion strategies that defeat the belief system?
 What is the entropy threshold that triggers optimal strike timing?
 
 
- Key Concepts
+Key Concepts
 POMDP Particle Filter Bayesian Inference Ant Colony Optimization Hamming Distance Q-Learning Reinforcement Learning Pygame WebAssembly
 
  License
